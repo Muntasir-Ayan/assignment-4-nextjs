@@ -1,5 +1,4 @@
-'use client'
-// components/VacationHome.tsx
+'use client';
 
 import React, { useState } from 'react';
 

@@ -75,7 +75,7 @@ const uploadImages = (req, res) => {
   if (!hotel) return res.status(404).json({ error: 'Hotel not found' });
 
   req.files.forEach((file) => {
-    const imageUrl = `/uploads/${file.filename}`;
+    const imageUrl = `http://localhost:3002/uploads/${file.filename}`;
     if (!hotel.images) hotel.images = [];
     hotel.images.push(imageUrl);
   });

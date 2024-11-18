@@ -21,21 +21,21 @@ import Image from "next/image";
 export default function Home() {
 
 
-  const [message, setMessage] = useState("loading")
-  useEffect(() =>{
-    fetch("http://localhost:3001/message/hello").then(
-      response => response.json()
-    ).then(
-      data => {
-        console.log(data)
-        setMessage(data.message)
-      }
-    )
-  }, [])
+  // const [message, setMessage] = useState("loading")
+  // useEffect(() =>{
+  //   fetch("http://localhost:3002/message/hello").then(
+  //     response => response.json()
+  //   ).then(
+  //     data => {
+  //       console.log(data)
+  //       setMessage(data.message)
+  //     }
+  //   )
+  // }, [])
 
   return (
     <main className="overflow-hidden">
-      <div>{message}</div>
+      {/* <div>{message}</div> */}
       <Navbar />
       <SubNavbar />
       <BodyImages/>
