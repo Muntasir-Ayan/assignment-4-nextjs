@@ -2,7 +2,7 @@ import React from 'react';
 
 const AmenitiesAndPolicies: React.FC = () => {
   return (
-    <div className="container mx-auto max-w-4xl mx-auto">
+    <div className="container max-w-4xl mx-auto">
       {/* Amenities */}
       <section className="mb-10 border-b border-gray-300 pb-6">
         <h2 className="text-2xl font-semibold text-gray-900 mb-6">Amenities</h2>

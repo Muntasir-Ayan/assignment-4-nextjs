@@ -1,3 +1,4 @@
+'use client'
 import AmenitiesAndPolicies from "@/components/AmenitiesAndPolicies";
 import BodyImages from "@/components/BodyImages";
 import BodyNavigation from "@/components/BodyNavigation";
@@ -12,12 +13,29 @@ import Reviews from "@/components/Reviews";
 import RoomAndBed from "@/components/RoomAndBed";
 import SubNavbar from "@/components/SubNavbar";
 
+import React, {useEffect, useState} from "react";
+
 import Image from "next/image";
 
 
 export default function Home() {
+
+
+  const [message, setMessage] = useState("loading")
+  useEffect(() =>{
+    fetch("http://localhost:3001/message/hello").then(
+      response => response.json()
+    ).then(
+      data => {
+        console.log(data)
+        setMessage(data.message)
+      }
+    )
+  }, [])
+
   return (
     <main className="overflow-hidden">
+      <div>{message}</div>
       <Navbar />
       <SubNavbar />
       <BodyImages/>
@@ -33,7 +51,7 @@ export default function Home() {
       <FAQ />
       <Reviews />
       <Footer />
-      <div>Hello</div>
+      
     </main>
     
   );
