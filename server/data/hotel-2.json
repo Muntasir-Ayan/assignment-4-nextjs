@@ -1,0 +1,40 @@
+{
+  "hotel_id": "hotel-2",
+  "slug": "radisson-blu",
+  "images": [],
+  "title": "Radisson Blu",
+  "description": "A beautiful Hotell in Dhaka.",
+  "guest_count": 5,
+  "bedroom_count": 2,
+  "bathroom_count": 1,
+  "amenities": [
+    "Free WiFi",
+    "Pool",
+    "Air Conditioning",
+    "Breakfast Included"
+  ],
+  "host_information": {
+    "name": "John Doe",
+    "contact": "+123456789",
+    "email": "john@example.com"
+  },
+  "address": "123 Ocean Drive, Miami Beach, FL",
+  "latitude": 25.790654,
+  "longitude": -80.1300455,
+  "rooms": [
+    {
+      "hotel_slug": "seaside-haven",
+      "room_slug": "ocean-view-suite",
+      "room_image": "https://example.com/hotel1/room1.jpg",
+      "room_title": "Ocean View Suite",
+      "bedroom_count": 1
+    },
+    {
+      "hotel_slug": "seaside-haven",
+      "room_slug": "garden-view-room",
+      "room_image": "https://example.com/hotel1/room2.jpg",
+      "room_title": "Garden View Room",
+      "bedroom_count": 1
+    }
+  ]
+}

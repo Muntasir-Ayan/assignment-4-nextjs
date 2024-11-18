@@ -39,9 +39,9 @@ interface HotelDetailsProps {
 const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
   const { id } = params;
 
-  // Fetch hotel data on the server side
+  // Fetch hotel data based on the id
   let hotelData: HotelData | null = null;
-  
+
   try {
     const response = await fetch(`http://localhost:3002/hotel/${id}`);
     if (response.ok) {
@@ -51,6 +51,7 @@ const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
     console.error('Error fetching hotel data:', error);
   }
 
+  // If no hotel data is found, return a "Hotel not found" page
   if (!hotelData) {
     return <div>Hotel not found</div>;
   }
@@ -60,7 +61,7 @@ const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
        {/* Image Gallery */}
        <Navbar />
        <SubNavbar />
-       <BodyImages images={hotelData.images || null} /> {/* Pass fetched images */}
+       <BodyImages images={hotelData.images || []} /> {/* Pass fetched images */}
        <BodyNavigation />
       {/* Pass hotelData to MainBody */}
       <MainBody hotelData={hotelData} />
@@ -68,22 +69,10 @@ const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
       <AmenitiesAndPolicies />
       <QuestionSection />
       <HouseRules />
-      {/* <DamageSection /> */}
       <Cancellation />
-      {/* <ImportantInfo /> */}
       <FAQ />
       <Reviews />
       <Footer />
-
-     
-
-      {/* Amenities */}
-      {/* <h3 className="text-xl font-bold mt-4">Amenities</h3>
-      <ul className="list-disc ml-6">
-        {hotelData.amenities.map((amenity, index) => (
-          <li key={index}>{amenity}</li>
-        ))}
-      </ul> */}
     </div>
   );
 };
