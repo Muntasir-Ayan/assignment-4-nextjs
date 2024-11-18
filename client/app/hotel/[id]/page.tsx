@@ -1,8 +1,19 @@
 // app/hotel/[id]/page.tsx
-
 import React from 'react';
+import AmenitiesAndPolicies from "@/components/AmenitiesAndPolicies";
+import BodyImages from "@/components/BodyImages";
+import BodyNavigation from "@/components/BodyNavigation";
+import Cancellation from "@/components/Cancellation";
+import FAQ from "@/components/FAQ";
+import Footer from "@/components/Footer";
+import HouseRules from "@/components/HouseRules";
+import MainBody from "@/components/MainBody";
+import Navbar from "@/components/Navbar";
+import QuestionSection from "@/components/QuestionSection";
+import Reviews from "@/components/Reviews";
+import RoomAndBed from "@/components/RoomAndBed";
+import SubNavbar from "@/components/SubNavbar";
 
-// Type Definitions
 interface HotelData {
   title: string;
   description: string;
@@ -25,7 +36,6 @@ interface HotelDetailsProps {
   hotelData: HotelData | null;
 }
 
-// Page Component with async data fetching
 const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
   const { id } = params;
 
@@ -47,76 +57,35 @@ const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold">{hotelData.title}</h1>
-      <p className="text-gray-600">{hotelData.description}</p>
+       {/* Image Gallery */}
+       <Navbar />
+       <SubNavbar />
+       <BodyImages images={hotelData.images || null} /> {/* Pass fetched images */}
+       <BodyNavigation />
+      {/* Pass hotelData to MainBody */}
+      <MainBody hotelData={hotelData} />
+      <RoomAndBed />
+      <AmenitiesAndPolicies />
+      <QuestionSection />
+      <HouseRules />
+      {/* <DamageSection /> */}
+      <Cancellation />
+      {/* <ImportantInfo /> */}
+      <FAQ />
+      <Reviews />
+      <Footer />
 
-      {/* Image Gallery */}
-      <div className="grid grid-cols-3 gap-4 my-4">
-        {hotelData.images.map((image, index) => (
-          <img
-            key={index}
-            src={image}
-            alt={`Image ${index + 1}`}
-            className="w-full h-64 object-cover rounded-md"
-          />
-        ))}
-      </div>
-
-      {/* Property Details */}
-      <div className="grid grid-cols-2 gap-4 my-4">
-        <div>
-          <p>
-            <strong>Guests:</strong> {hotelData.guest_count}
-          </p>
-          <p>
-            <strong>Bedrooms:</strong> {hotelData.bedroom_count}
-          </p>
-          <p>
-            <strong>Bathrooms:</strong> {hotelData.bathroom_count}
-          </p>
-        </div>
-        <div>
-          <p>
-            <strong>Address:</strong> {hotelData.address}
-          </p>
-          <p>
-            <strong>Host:</strong> {hotelData.host_information.name}
-          </p>
-          <p>
-            <strong>Contact:</strong> {hotelData.host_information.contact}
-          </p>
-        </div>
-      </div>
+     
 
       {/* Amenities */}
-      <h3 className="text-xl font-bold mt-4">Amenities</h3>
+      {/* <h3 className="text-xl font-bold mt-4">Amenities</h3>
       <ul className="list-disc ml-6">
         {hotelData.amenities.map((amenity, index) => (
           <li key={index}>{amenity}</li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };
-
-// This function will run on the server side to fetch data
-export async function generateMetadata({ params }: { params: { id: string } }) {
-  const { id } = params;
-  let title = 'Hotel Details';
-
-  try {
-    const res = await fetch(`http://localhost:3002/hotel/${id}`);
-    if (res.ok) {
-      const data = await res.json();
-      title = data.title || title;
-    }
-  } catch (error) {
-    console.error('Error fetching metadata:', error);
-  }
-
-  return {
-    title,
-  };
-}
 
 export default HotelDetails;

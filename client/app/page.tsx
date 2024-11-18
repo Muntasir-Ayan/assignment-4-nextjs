@@ -38,7 +38,7 @@ export default function Home() {
       {/* <div>{message}</div> */}
       <Navbar />
       <SubNavbar />
-      <BodyImages/>
+      <BodyImages images={null}/>
       <BodyNavigation />
       <MainBody />
       <RoomAndBed />
