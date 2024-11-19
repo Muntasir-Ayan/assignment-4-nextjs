@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
+import BookingCard from './SideBar';
 
 interface MainBodyProps {
   hotelData?: {
@@ -103,47 +104,7 @@ const MainBody: React.FC<MainBodyProps> = ({ hotelData }) => {
         </div>
 
         <div>
-          {/* Booking Section */}
-          <div className="bg-blue-800 text-white p-4 rounded mt-6">
-            <h2 className="text-lg">Price: $134 per night</h2>
-            <button
-              onClick={() => setShowPopup(true)}
-              className="mt-2 bg-blue-500 p-2 rounded"
-            >
-              Book now
-            </button>
-          </div>
-
-          {/* Popup for traveler count */}
-          {showPopup && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-              <div className="bg-white p-4 rounded">
-                <h3>Travelers</h3>
-                <div className="flex justify-between mt-2">
-                  <span>Adults:</span>
-                  <button onClick={() => updateCount('adult', -1)}>-</button>
-                  {adultCount}
-                  <button onClick={() => updateCount('adult', 1)}>+</button>
-                </div>
-                <div className="flex justify-between mt-2">
-                  <span>Children:</span>
-                  {adultCount > 0 && (
-                    <>
-                      <button onClick={() => updateCount('child', -1)}>-</button>
-                      {childCount}
-                      <button onClick={() => updateCount('child', 1)}>+</button>
-                    </>
-                  )}
-                </div>
-                <button
-                  onClick={() => setShowPopup(false)}
-                  className="mt-4 bg-gray-300 p-2 rounded"
-                >
-                  Done
-                </button>
-              </div>
-            </div>
-          )}
+          <BookingCard />
         </div>
       </div>
     </div>
