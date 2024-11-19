@@ -1,7 +1,14 @@
 {
   "hotel_id": "hotel-2",
   "slug": "radisson-blu",
-  "images": [],
+  "images": [
+    "http://localhost:3002/uploads/1731981790576_download (1).jpg",
+    "http://localhost:3002/uploads/1731981790578_download (2).jpg",
+    "http://localhost:3002/uploads/1731981790578_download.jpg",
+    "http://localhost:3002/uploads/1731981790584_OIP (1).jpg",
+    "http://localhost:3002/uploads/1731981790586_OIP (2).jpg",
+    "http://localhost:3002/uploads/1731981790586_OIP.jpg"
+  ],
   "title": "Radisson Blu",
   "description": "A beautiful Hotell in Dhaka.",
   "guest_count": 5,
