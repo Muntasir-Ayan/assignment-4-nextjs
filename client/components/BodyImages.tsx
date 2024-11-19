@@ -1,4 +1,3 @@
-// client/component/BodyImages.tsx
 'use client';
 import { useState, useEffect } from 'react';
 
@@ -8,10 +7,11 @@ type BodyImagesProps = {
 
 const defaultImages = [
   "https://plus.unsplash.com/premium_photo-1687960116497-0dc41e1808a2", 
-  "https://media.istockphoto.com/id/119926339/photo/resort-swimming-pool.jpg", 
+  "https://img.freepik.com/free-photo/beautiful-luxury-outdoor-swimming-pool-hotel-resort_74190-7433.jpg?semt=ais_hybrid", 
   "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4", 
   "https://images.unsplash.com/photo-1495365200479-c4ed1d35e1aa", 
-  "https://plus.unsplash.com/premium_photo-1687960116497-0dc41e1808a2"
+  "https://plus.unsplash.com/premium_photo-1687960116497-0dc41e1808a2",
+  "https://media.istockphoto.com/id/1213840216/photo/luxury-travel-romantic-couple-in-beach-hotel.jpg?s=612x612&w=0&k=20&c=1m4GfnUTJV4zZEDr_p1OYVQhmwM5F30MrbUhzYVacko="
 ]; // Initial images for the homepage
 
 const BodyImages: React.FC<BodyImagesProps> = ({ images }) => {
@@ -36,34 +36,35 @@ const BodyImages: React.FC<BodyImagesProps> = ({ images }) => {
   const nextImage = () => setCurrentIndex((prev) => Math.min(prev + 1, currentImages.length - 1));
   const prevImage = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
 
+  const displayedImages = currentImages.slice(0, 5);
+
   return (
     <div className="container mx-auto mt-5">
       {/* Gallery */}
       <div className="grid grid-cols-4 gap-4">
-        {currentImages.length > 0 ? (
-          currentImages.map((image, index) => (
-            <div
-              key={index}
-              className={`relative overflow-hidden rounded-lg cursor-pointer ${
-                index === 0 ? 'col-span-2 row-span-2' : ''
-              }`}
-              onClick={() => openViewer(index)}
-            >
-              <img
-                src={image}
-                alt={`Image ${index + 1}`}
-                className="w-full h-full object-cover hover:scale-105 transition-transform"
-              />
-              {index === currentImages.length - 1 && (
-                <div className="absolute bottom-4 right-4 bg-black bg-opacity-70 text-white px-3 py-1 rounded-md text-sm">
-                  {currentImages.length}+
-                </div>
-              )}
-            </div>
-          ))
-        ) : (
-          <div className="col-span-4 text-center text-gray-500">No images available</div>
-        )}
+        {displayedImages.map((image, index) => (
+          <div
+            key={index}
+            className={`relative overflow-hidden rounded-lg cursor-pointer ${
+              index === 0 ? 'col-span-2 row-span-2' : ''
+            }`}
+            onClick={() => openViewer(index)}
+          >
+            <img
+              src={image}
+              alt={`Image ${index + 1}`}
+              className="w-full h-full object-cover hover:scale-105 transition-transform"
+            />
+            {index === displayedImages.length - 1 && currentImages.length > 5 && (
+              <div
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 text-white text-2xl font-bold rounded-lg"
+                onClick={() => openViewer(5)}
+              >
+                +{currentImages.length }
+              </div>
+            )}
+          </div>
+        ))}
       </div>
 
       {/* Image Viewer */}
