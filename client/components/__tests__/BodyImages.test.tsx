@@ -1,81 +1,113 @@
+import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import BodyImages from '@/components/BodyImages';
 
-describe('BodyImages Component', () => {
-  const mockImages = [
-    'https://example.com/image1.jpg',
-    'https://example.com/image2.jpg',
-    'https://example.com/image3.jpg',
-  ];
+const mockImages = [
+  'https://example.com/image1.jpg',
+  'https://example.com/image2.jpg',
+  'https://example.com/image3.jpg',
+  'https://example.com/image4.jpg',
+  'https://example.com/image5.jpg',
+  'https://example.com/image6.jpg',
+];
 
-  it('renders default images when no images are passed via props', () => {
+describe('BodyImages Component', () => {
+  test('renders default images if no images are passed as props', () => {
     render(<BodyImages images={null} />);
-    const defaultImages = screen.getAllByRole('img');
-    expect(defaultImages.length).toBeGreaterThan(0);
-    expect(defaultImages[0]).toHaveAttribute('src', 'https://plus.unsplash.com/premium_photo-1687960116497-0dc41e1808a2');
+
+    // Verify images from defaultImages are rendered
+    const images = screen.getAllByRole('img');
+    expect(images).toHaveLength(5); // Default images are sliced to show 5
+    expect(images[0]).toHaveAttribute('src', expect.stringContaining('plus.unsplash.com'));
   });
 
-  it('renders new images when passed via props', () => {
+  test('renders passed images via props', () => {
     render(<BodyImages images={mockImages} />);
+
+    // Verify images from mockImages are rendered
     const images = screen.getAllByRole('img');
-    expect(images.length).toBe(mockImages.length);
+    expect(images).toHaveLength(5); // Only first 5 images should display
     expect(images[0]).toHaveAttribute('src', mockImages[0]);
   });
 
-  it('renders a "more images" overlay if there are more than 5 images', () => {
-    const manyImages = Array.from({ length: 6 }, (_, i) => `https://example.com/image${i + 1}.jpg`);
-    render(<BodyImages images={manyImages} />);
-    expect(screen.getByText('+6')).toBeInTheDocument();
+  test('displays +N overlay for additional images', () => {
+    render(<BodyImages images={mockImages} />);
+
+    // Check for the overlay text
+    const overlay = screen.getByText(`+${mockImages.length}`);
+    expect(overlay).toBeInTheDocument();
   });
 
-  it('opens the image viewer when an image is clicked', () => {
+  test('opens image viewer when an image is clicked', () => {
     render(<BodyImages images={mockImages} />);
-    const firstImage = screen.getAllByRole('img')[0];
-    fireEvent.click(firstImage);
-    expect(screen.getByText(/Image 1/i)).toBeInTheDocument(); // Verifying viewer is open
-  });
 
-  it('displays the correct image in the viewer and allows navigation', () => {
-    render(<BodyImages images={mockImages} />);
+    // Simulate clicking on the first image
     const firstImage = screen.getAllByRole('img')[0];
     fireEvent.click(firstImage);
 
-    const nextButton = screen.getByText('Next');
+    // Verify image viewer is open
+    const modalImage = screen.getByRole('img', { name: /image 1/i });
+    expect(modalImage).toBeInTheDocument();
+    expect(modalImage).toHaveAttribute('src', mockImages[0]);
+  });
+
+  test('navigates to the next and previous images in the viewer', () => {
+    render(<BodyImages images={mockImages} />);
+
+    // Open viewer
+    const firstImage = screen.getAllByRole('img')[0];
+    fireEvent.click(firstImage);
+
+    // Navigate to the next image
+    const nextButton = screen.getByText(/next/i);
     fireEvent.click(nextButton);
-    expect(screen.getByAltText('Image 2')).toBeInTheDocument();
 
-    const prevButton = screen.getByText('Previous');
+    const modalImage = screen.getByRole('img');
+    expect(modalImage).toHaveAttribute('src', mockImages[1]);
+
+    // Navigate back to the previous image
+    const prevButton = screen.getByText(/previous/i);
     fireEvent.click(prevButton);
-    expect(screen.getByAltText('Image 1')).toBeInTheDocument();
+
+    expect(modalImage).toHaveAttribute('src', mockImages[0]);
   });
 
-  it('closes the viewer when the close button is clicked', () => {
+  test('closes the viewer when the close button is clicked', () => {
     render(<BodyImages images={mockImages} />);
+
+    // Open viewer
     const firstImage = screen.getAllByRole('img')[0];
     fireEvent.click(firstImage);
 
-    const closeButton = screen.getByText('×');
+    // Close viewer
+    const closeButton = screen.getByText(/×/i); // Close button
     fireEvent.click(closeButton);
-    expect(screen.queryByText(/Image 1/i)).not.toBeInTheDocument(); // Viewer is closed
+
+    // Verify viewer is closed
+    expect(screen.queryByRole('img')).not.toBeInTheDocument();
   });
 
-  it('disables "Previous" button when on the first image', () => {
+  test('disables navigation buttons appropriately', () => {
     render(<BodyImages images={mockImages} />);
+
+    // Open viewer
     const firstImage = screen.getAllByRole('img')[0];
     fireEvent.click(firstImage);
 
-    const prevButton = screen.getByText('Previous');
+    const prevButton = screen.getByText(/previous/i);
+    const nextButton = screen.getByText(/next/i);
+
+    // At the first image
     expect(prevButton).toBeDisabled();
-  });
-
-  it('disables "Next" button when on the last image', () => {
-    render(<BodyImages images={mockImages} />);
-    const firstImage = screen.getAllByRole('img')[0];
-    fireEvent.click(firstImage);
-
-    const nextButton = screen.getByText('Next');
     fireEvent.click(nextButton);
-    fireEvent.click(nextButton);
+
+    // Navigate to the last image
+    for (let i = 0; i < mockImages.length - 2; i++) {
+      fireEvent.click(nextButton);
+    }
+
+    // At the last image
     expect(nextButton).toBeDisabled();
   });
 });
