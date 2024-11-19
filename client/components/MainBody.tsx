@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
-import BookingCard from './SideBar';
+import BookingCard from '@/components/BookingCard';
 
 interface MainBodyProps {
   hotelData?: {

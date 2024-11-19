@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '@/app/css/all.css'
 
 interface Traveler {
   adults: number;
