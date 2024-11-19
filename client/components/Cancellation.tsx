@@ -2,7 +2,7 @@ import React from 'react';
 
 const Cancellation: React.FC = () => {
   return (
-    <div className="container mx-auto cancellation-section grid gap-6">
+    <div className="grid grid-cols-2 container mx-auto cancellation-section gap-6">
       <h2 className="text-2xl font-semibold">Cancellation</h2>
       <div>
         <div className="timeline relative h-1 bg-gray-300 my-4">

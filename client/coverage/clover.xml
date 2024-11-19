@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1732015242185" clover="3.2.0">
+  <project timestamp="1732015242185" name="All files">
+    <metrics statements="20" coveredstatements="19" conditionals="8" coveredconditionals="8" methods="11" coveredmethods="8" elements="39" coveredelements="35" complexity="0" loc="20" ncloc="20" packages="1" files="1" classes="1"/>
+    <file name="BodyImages.tsx" path="/home/w3e10/Desktop/assignment-4-nextjs/client/components/BodyImages.tsx">
+      <metrics statements="20" coveredstatements="19" conditionals="8" coveredconditionals="8" methods="11" coveredmethods="8"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="18" count="20" type="stmt"/>
+      <line num="19" count="20" type="stmt"/>
+      <line num="20" count="20" type="stmt"/>
+      <line num="23" count="20" type="stmt"/>
+      <line num="24" count="7" type="cond" truecount="3" falsecount="0"/>
+      <line num="25" count="6" type="stmt"/>
+      <line num="29" count="20" type="stmt"/>
+      <line num="30" count="4" type="stmt"/>
+      <line num="31" count="4" type="stmt"/>
+      <line num="34" count="20" type="stmt"/>
+      <line num="36" count="20" type="stmt"/>
+      <line num="37" count="20" type="stmt"/>
+      <line num="39" count="20" type="stmt"/>
+      <line num="46" count="76" type="stmt"/>
+      <line num="51" count="4" type="stmt"/>
+      <line num="61" count="0" type="stmt"/>
+      <line num="114" count="7" type="stmt"/>
+    </file>
+  </project>
+</coverage>
