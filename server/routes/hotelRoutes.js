@@ -3,7 +3,7 @@ const multer = require('multer');
 const {
   getAllHotelIds,
   addHotel,
-  getHotelById,
+  getHotelByIdOrSlug ,
   updateHotel,
   uploadImages
 } = require('../controllers/hotelController');
@@ -20,7 +20,7 @@ const upload = multer({ storage });
 
 router.get('/hotels', getAllHotelIds);
 router.post('/hotel', hotelValidation, addHotel);
-router.get('/hotel/:hotelId', getHotelById);
+router.get('/hotel/:idOrSlug', getHotelByIdOrSlug );
 router.put('/hotel/:hotelId', hotelValidation, updateHotel);
 router.post('/images/:hotelId', upload.array('images', 10), uploadImages);
 

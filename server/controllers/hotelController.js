@@ -48,13 +48,31 @@ const addHotel = (req, res) => {
   res.status(201).json(newHotel);
 };
 
-// Get a hotel by ID
-const getHotelById = (req, res) => {
-  const hotelId = req.params.hotelId;
-  const hotel = loadHotelData(hotelId);
-  if (!hotel) return res.status(404).json({ error: 'Hotel not found' });
-  res.status(200).json(hotel);
+// Get a hotel by ID or Slug
+const getHotelByIdOrSlug = (req, res) => {
+  const param = req.params.idOrSlug;
+
+  // Check if the param matches a hotelId
+  const hotel = loadHotelData(param);
+  if (hotel) {
+    return res.status(200).json(hotel);
+  }
+
+  // If not found by hotelId, check all files for a matching slug
+  const files = fs.readdirSync(hotelDir);
+  for (const file of files) {
+    if (file.endsWith('.json')) {
+      const hotelData = JSON.parse(fs.readFileSync(path.join(hotelDir, file), 'utf-8'));
+      if (hotelData.slug === param) {
+        return res.status(200).json(hotelData);
+      }
+    }
+  }
+
+  // If no match is found
+  return res.status(404).json({ error: 'Hotel not found' });
 };
+
 
 // Update hotel data
 const updateHotel = (req, res) => {
@@ -87,7 +105,7 @@ const uploadImages = (req, res) => {
 module.exports = {
   getAllHotelIds,
   addHotel,
-  getHotelById,
+  getHotelByIdOrSlug,
   updateHotel,
   uploadImages,
   saveHotelData,     
