@@ -32,7 +32,7 @@ const SubNavbar: React.FC = () => {
   };
 
   const copyLink = async () => {
-    const link = "http://127.0.0.1:5501/assignment-2/";
+    const link = "http://127.0.0.1:3000";
     try {
       await navigator.clipboard.writeText(link);
       alert("Link copied to clipboard!");

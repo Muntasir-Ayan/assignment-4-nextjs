@@ -9,8 +9,11 @@ const FAQ: React.FC = () => {
   ];
 
   return (
-    <div className="container mx-auto faq-section mt-10">
+    <div className="grid grid-cols-2 container mx-auto faq-section mt-10">
+      <div>
       <h2 className="text-2xl font-semibold mb-6">Frequently asked questions</h2>
+      </div>
+      <div>
       {faqs.map((faq, index) => (
         <div key={index} className="faq-item border-b py-4 cursor-pointer">
           <div className="flex justify-between items-center">
@@ -19,6 +22,8 @@ const FAQ: React.FC = () => {
           </div>
         </div>
       ))}
+      </div>
+     
     </div>
   );
 };

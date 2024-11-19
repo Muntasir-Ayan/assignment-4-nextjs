@@ -75,7 +75,8 @@ const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
       <Cancellation />
       <FAQ />
       <Reviews />
-      <Footer />
+      {/* Pass host information to Footer */}
+      <Footer hostInformation={hotelData.host_information} />
     </div>
   );
 };

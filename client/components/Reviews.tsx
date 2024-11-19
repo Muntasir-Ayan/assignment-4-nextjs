@@ -1,8 +1,9 @@
 import React from 'react';
-
+import "@/app/css/all.css";
 const Reviews: React.FC = () => {
   return (
-    <div className="container mx-auto reviews-section grid gap-8">
+    <div className="grid grid-cols-2 container mx-auto reviews-section">
+      <div>
       <div className="rating-header flex items-baseline gap-3">
         <span className="text-green-500 text-4xl font-semibold">9.8/10</span>
         <span className="text-2xl font-medium">Exceptional</span>
@@ -12,6 +13,10 @@ const Reviews: React.FC = () => {
         <span>ℹ️</span>
       </div>
       <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, autem.</div>
+      </div>
+      
+      <div>
+      
       <div className="reviews-slider flex overflow-x-auto gap-6 pb-5 snap-x">
         <div className="review-card min-w-[300px] p-6 border rounded-lg snap-start">
           <div className="font-bold">10/10 Excellent</div>
@@ -30,6 +35,7 @@ const Reviews: React.FC = () => {
         <a href="#" className="see-all-btn inline-flex items-center gap-2 px-4 py-2 text-blue-600 border border-gray-300 rounded-lg">
           See all 24 reviews <span>→</span>
         </a>
+      </div>
       </div>
     </div>
   );
