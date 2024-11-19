@@ -5,6 +5,7 @@ const {
   addHotel,
   getHotelByIdOrSlug ,
   updateHotel,
+  getAllHotels,
   uploadImages
 } = require('../controllers/hotelController');
 const { hotelValidation } = require('../middleware/validation');
@@ -18,10 +19,11 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-router.get('/hotels', getAllHotelIds);
+router.get('/hotels/id', getAllHotelIds);
 router.post('/hotel', hotelValidation, addHotel);
 router.get('/hotel/:idOrSlug', getHotelByIdOrSlug );
 router.put('/hotel/:hotelId', hotelValidation, updateHotel);
 router.post('/images/:hotelId', upload.array('images', 10), uploadImages);
+router.get('/hotels', getAllHotels);
 
 module.exports = router;

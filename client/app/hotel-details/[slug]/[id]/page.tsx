@@ -1,5 +1,4 @@
-// app/hotel/[id]/page.tsx
-import React from 'react';
+import React from "react";
 import AmenitiesAndPolicies from "@/components/AmenitiesAndPolicies";
 import BodyImages from "@/components/BodyImages";
 import BodyNavigation from "@/components/BodyNavigation";
@@ -33,37 +32,41 @@ interface HotelData {
 }
 
 interface HotelDetailsProps {
-  hotelData: HotelData | null;
+  params: { slug: string; id: string };
 }
 
 const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
-  const { id } = params;
+  const { slug, id } = params;
 
-  // Fetch hotel data based on the id
   let hotelData: HotelData | null = null;
 
   try {
     const response = await fetch(`http://localhost:3002/hotel/${id}`);
     if (response.ok) {
-      hotelData = await response.json();
+      const data = await response.json();
+
+      // Validate if the slug matches
+      if (data.slug !== slug) {
+        return <div>Hotel not found</div>;
+      }
+
+      hotelData = data;
     }
   } catch (error) {
-    console.error('Error fetching hotel data:', error);
+    console.error("Error fetching hotel data:", error);
   }
 
-  // If no hotel data is found, return a "Hotel not found" page
+  // If no hotel data is found
   if (!hotelData) {
     return <div>Hotel not found</div>;
   }
 
   return (
     <div className="container mx-auto p-4">
-       {/* Image Gallery */}
-       <Navbar />
-       <SubNavbar />
-       <BodyImages images={hotelData.images || []} /> {/* Pass fetched images */}
-       <BodyNavigation />
-      {/* Pass hotelData to MainBody */}
+      <Navbar />
+      <SubNavbar />
+      <BodyImages images={hotelData.images || []} />
+      <BodyNavigation />
       <MainBody hotelData={hotelData} />
       <RoomAndBed />
       <AmenitiesAndPolicies />

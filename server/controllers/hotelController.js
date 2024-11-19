@@ -102,12 +102,31 @@ const uploadImages = (req, res) => {
   res.status(200).json(hotel);
 };
 
+
+// Fetch all hotels data
+const getAllHotels = (req, res) => {
+  try {
+    const files = fs.readdirSync(hotelDir);
+    const hotels = files
+      .filter(file => file.endsWith('.json'))
+      .map(file => {
+        const filePath = path.join(hotelDir, file);
+        return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+      });
+
+    res.status(200).json(hotels);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch hotel data', details: error.message });
+  }
+};
+
 module.exports = {
   getAllHotelIds,
   addHotel,
   getHotelByIdOrSlug,
   updateHotel,
   uploadImages,
-  saveHotelData,     
+  saveHotelData,
+  getAllHotels,     
   loadHotelData      
 };
