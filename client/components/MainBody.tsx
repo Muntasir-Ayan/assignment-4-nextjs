@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 
 interface MainBodyProps {
@@ -77,7 +78,13 @@ const MainBody: React.FC<MainBodyProps> = ({ hotelData }) => {
           <div className="grid grid-cols-2">
             <div>
               <div>
-                <h1>Map</h1>
+                <Image
+                  src="/map.jpeg"
+                  alt="Vacation Image"
+                  width={800} // Adjust the width as per your design
+                  height={600} // Adjust the height as per your design
+                  layout="responsive" // Optional, use 'intrinsic' or 'fill' based on your design
+                />
               </div>
               <div className="location-name">{hotelData?.address || defaultAddress}</div>
               <a href="#" className="view-map-link">View in a map</a>
@@ -85,10 +92,10 @@ const MainBody: React.FC<MainBodyProps> = ({ hotelData }) => {
             <div>
               <ul className="list-disc ml-5">
                 {/* You can populate this dynamically if `hotelData?.nearbyPlaces` is available */}
-                <li>Auke Bay - 6 min drive</li>
-                <li>University of Alaska-Southeast - 10 min drive</li>
-                <li>Mendenhall Golf Course - 14 min drive</li>
-                <li>Juneau, AK (JNU-Juneau Intl.) - 14 min drive</li>
+                <li>Auke Bay    -        6 min drive</li>
+                <li>University of Alaska-Southeast    -        10 min drive</li>
+                <li>Mendenhall Golf Course    -        14 min drive</li>
+                <li>Juneau, AK (JNU-Juneau Intl.)    -        14 min drive</li>
               </ul>
             </div>
           </div>
@@ -99,8 +106,8 @@ const MainBody: React.FC<MainBodyProps> = ({ hotelData }) => {
           {/* Booking Section */}
           <div className="bg-blue-800 text-white p-4 rounded mt-6">
             <h2 className="text-lg">Price: $134 per night</h2>
-            <button 
-              onClick={() => setShowPopup(true)} 
+            <button
+              onClick={() => setShowPopup(true)}
               className="mt-2 bg-blue-500 p-2 rounded"
             >
               Book now
@@ -128,8 +135,8 @@ const MainBody: React.FC<MainBodyProps> = ({ hotelData }) => {
                     </>
                   )}
                 </div>
-                <button 
-                  onClick={() => setShowPopup(false)} 
+                <button
+                  onClick={() => setShowPopup(false)}
                   className="mt-4 bg-gray-300 p-2 rounded"
                 >
                   Done
