@@ -64,7 +64,7 @@ const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
   return (
     <div className="container mx-auto p-4">
       <Navbar />
-      <SubNavbar />
+      <SubNavbar hotelData={hotelData}/>
       <BodyImages images={hotelData.images || []} />
       <BodyNavigation />
       <MainBody hotelData={hotelData} />

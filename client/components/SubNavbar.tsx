@@ -2,7 +2,15 @@
 
 import React, { useEffect, useState } from "react";
 
-const SubNavbar: React.FC = () => {
+interface SubNavProps {
+  hotelData?: {
+    title: string;
+    description: string;
+    images: string[] | null;
+  };
+}
+
+const SubNavbar: React.FC<SubNavProps> = ({ hotelData }) => {
   const [isSharePopupOpen, setIsSharePopupOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
 
@@ -32,19 +40,24 @@ const SubNavbar: React.FC = () => {
   };
 
   const copyLink = async () => {
-    const link = "http://127.0.0.1:3000";
+    const currentUrl = window.location.href; // Get the current page URL
     try {
-      await navigator.clipboard.writeText(link);
+      await navigator.clipboard.writeText(currentUrl);
       alert("Link copied to clipboard!");
     } catch (error) {
       console.error("Could not copy link: ", error);
     }
   };
 
+  // Use default values in case hotelData is not provided
+  const defaultImage = hotelData?.images?.[0] || "https://plus.unsplash.com/premium_photo-1687960116497-0dc41e1808a2";
+  const title = hotelData?.title || "Hotel Title";
+  const description = hotelData?.description || "Hotel Description";
+
   return (
-    <div className="container mx-auto flex flex-col gap-4 mt-8  mb-8">
+    <div className="container mx-auto flex flex-col gap-4 mt-8 mb-8">
       {/* Upper Body Section */}
-      <div className="flex justify-between items-center  w-full mx-auto max-w-screen-lg">
+      <div className="flex justify-between items-center w-full mx-auto max-w-screen-lg">
         {/* Left Arrow Link */}
         <div className="text-lg font-light">
           <a href="#" className="text-blue-600 hover:underline">
@@ -62,15 +75,11 @@ const SubNavbar: React.FC = () => {
             Share
           </button>
           <button
-            className={`px-4 py-2 bg-white border-2 ${
-              isSaved ? "border-red-500" : "border-blue-400"
-            } rounded-full text-black text-base font-light flex items-center gap-2 hover:bg-blue-100`}
+            className={`px-4 py-2 bg-white border-2 ${isSaved ? "border-red-500" : "border-blue-400"} rounded-full text-black text-base font-light flex items-center gap-2 hover:bg-blue-100`}
             onClick={toggleSaveState}
           >
             <i
-              className={`fa-heart ${
-                isSaved ? "fa-solid text-red-500" : "fa-regular text-blue-400"
-              }`}
+              className={`fa-heart ${isSaved ? "fa-solid text-red-500" : "fa-regular text-blue-400"}`}
             ></i>
             {isSaved ? "Saved" : "Save"}
           </button>
@@ -102,16 +111,13 @@ const SubNavbar: React.FC = () => {
             {/* Image and Details */}
             <div className="flex gap-4 items-start mb-4">
               <img
-                src="https://plus.unsplash.com/premium_photo-1687960116497-0dc41e1808a2?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cmVzb3J0fGVufDB8fDB8fHww"
-                alt="Vacation"
+                src={defaultImage}
+                alt={title}
                 className="w-20 h-20 rounded-lg object-cover"
               />
               <div>
-                <h4 className="font-medium">
-                  Juneau Vacation Home: Stunning View + Beach Access
-                </h4>
-                <p className="text-sm text-gray-500">United States of America</p>
-                <p className="text-sm text-gray-500">9.8/10</p>
+                <h4 className="font-medium">{title}</h4>
+                <p className="text-sm text-gray-500">{description}</p>
               </div>
             </div>
 
