@@ -1,8 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hotel Booking Application
 
+This project is a full-stack hotel booking application built with modern web technologies.
+
+## Features
+
+- **Frontend**: Built using Next.js, TypeScript, and Jest for unit testing.
+- **Backend**: Developed using Node.js, Express.js, and Jest for backend testing.
+- **Functionalities**:
+  - User registration and authentication.
+  - Browse available rooms and booking options.
+  - Create, view, update, and cancel bookings.
+  - Admin panel for managing hotels, rooms, and bookings.
+
+---
+## Technologies Used
+
+### Frontend
+- **Framework**: Next.js
+- **Language**: TypeScript
+- **Testing**: Jest
+
+### Backend
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Language**: JavaScript
+- **Testing**: Jest
+
+---
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+Make sure you have the following installed:
+- Node.js (v16 or higher)
+- npm (v7 or higher)
+
+---
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Muntasir-Ayan/assignment-4-nextjs.git
+   cd assignment-4-nextjs
+
+2. Navigate to the Frontend:
+    ```bash
+    cd client
+    npm install
+    ```
+3. Navigate to the the Backend:
+    ```bash
+    cd server
+    npm install
+    ```
+
+## Client (Frontend)
+
+make sure you are in client directory
+  ```bash
+    cd client
+     ```
+run the development server:
 
 ```bash
 npm run dev
@@ -14,23 +72,4 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The frontend will be available at [http://localhost:3000].
