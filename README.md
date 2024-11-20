@@ -139,7 +139,9 @@ for testing:
     ├── app.js               # Main server file <br>
     └── setupExpressApp.js   # Script for setting up the project structure <br>
     └── package.json <br>
-
+### To Navigate Dynamically
+    - client server and backend server should be running in different port
+- **To Navigate otherpage**:[http://localhost:3000/hotel-details/{slug}/{hotel-id}]
 ### Server Api Endpoints
   -  GET /hotels: Retrieve all hotel IDs.
   -  POST /hotel: Add a new hotel.
