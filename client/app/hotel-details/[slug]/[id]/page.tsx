@@ -12,6 +12,7 @@ import QuestionSection from "@/components/QuestionSection";
 import Reviews from "@/components/Reviews";
 import RoomAndBed from "@/components/RoomAndBed";
 import SubNavbar from "@/components/SubNavbar";
+import NotFound from "@/app/NotFound";
 
 interface HotelData {
   title: string;
@@ -58,7 +59,7 @@ const HotelDetails: React.FC<HotelDetailsProps> = async ({ params }) => {
 
   // If no hotel data is found
   if (!hotelData) {
-    return <div>Hotel not found</div>;
+    return <div><NotFound /></div>;
   }
 
   return (
