@@ -59,17 +59,42 @@ Make sure you have the following installed:
 make sure you are in client directory
   ```bash
     cd client
-     ```
+ ```
 run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
+ ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    # or
+    bun dev
+ ```
+ 
 The frontend will be available at [http://localhost:3000].
+
+ For testing:
+  ```bash
+  npm test
+  #   or
+  npm test -- --coverage
+
+
+
+## Server (Backend)
+
+make sure you are in server directory
+ ```bash
+    cd server
+ ```
+run the server:
+ ```bash
+    nodemon start
+ ```
+for testing:
+ ```bash
+  npm test
+  #   or
+  npm test -- --coverage
+ ```
+
